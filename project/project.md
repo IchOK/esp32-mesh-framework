@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.27.0
+version: 0.28.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -14,7 +14,7 @@ supersedes: null
 references:
   requirements: []
   functional_specs: []
-  adrs: [ADR-0001, ADR-0002, ADR-0003]
+  adrs: [ADR-0001, ADR-0002, ADR-0003, ADR-0004]
 review_required: []
 ---
 
@@ -115,12 +115,15 @@ Functional Specifications festgelegt.
 
 ### Software
 
-- Gateway-Firmware: **Arduino/PlatformIO** mit Libs; ESP-Mesh-Lite als Wrapper/Component, Kompatibilität zur PlatformIO-Version noch zu bestätigen.
+- Gateway-Firmware: **ESP-IDF pur** (Entscheidung ADR-0004, T-023) mit fest
+  gebundener IDF-5.x-Version und ESP-Mesh-Lite als registrierte Component;
+  Arduino/PlatformIO nur bei begründeter Notwendigkeit als Aufbau darüber.
 - Node-RED: läuft auf **Raspberry Pi / Mini-PC**; Anbindung des Gateways über **WebSocket mit JSON** (Node-RED-Host im Heim-WLAN).
 - Webserver: **auf dem Gateway** – liefert die statische Weboberfläche **von der
   SD-Card** und stellt Status/Steuerung per **WebSocket mit JSON** bereit (Browser
-  und Node-RED teilen denselben Server). Anmeldung vor Firmware-Updates/Steuerung,
-  Zugangsart (Basic Auth / Token / Session) noch zu wählen.
+  und Node-RED teilen denselben Server). **Basic Auth auf der Webseite**
+  (Entscheidung 2026-10-25); die Telegramm-Ebene hat bewusst keinen
+  Zugriffsschutz — Node-RED zählt zum vertrauenswürdigen LAN-Betrieb.
 
 ### Connectivity
 
@@ -131,8 +134,10 @@ Functional Specifications festgelegt.
   (Node-RED-Host Raspberry Pi / Mini-PC). USB am Core2 nur für Flashen/Logging –
   Bestätigung offen.
 - Gateway ↔ Mesh-Knoten: IP über ESP-Mesh-Lite (Multi-Hop).
-- **Zeitbasis:** Time-Sync innerhalb des Netzwerkes (Root/Gateway als Zeitquelle,
-  Vererbung übers Mesh); Telegramme führen ihren Zeitstempel mit.
+- **Zeitbasis:** Time-Sync innerhalb des Netzwerkes, getrieben von **Node-RED**:
+  Node-RED sendet über das Gateway ein besonderes Time-Sync-Telegramm an alle
+  Knoten; die Knoten führen die Zeit danach selbst weiter. Telegramme führen
+  ihren Zeitstempel mit (RTC-/Stetigkeitsfrage → T-025).
 - Telegramme Gateway ↔ Knoten im Auftrag von Node-RED: zwei Klassen –
   **asynchron** (Daten, ggf. gepuffert) und **synchron** (direkt an den Knoten mit
   sofortiger Rückmeldung, nicht gepuffert).
@@ -152,8 +157,10 @@ Functional Specifications festgelegt.
 
 ## 5. Operation, Safety and Control
 
-- Firmware-Update nur nach bewusster Benutzerbestätigung und nach erfolgreicher
-  Anmeldung am Gateway; die Images liegen zuvor auf der SD-Card des Gateways.
+- Firmware-Update nur nach bewusster Benutzerbestätigung; ausgelöst über die
+  per Basic Auth geschützte Web-UI oder über die Node-RED-Schiene
+  (vertrauenswürdige Quelle, keine zusätzliche Anmeldung); die Images liegen
+  zuvor auf der SD-Card des Gateways.
 - Update-Auslösung als **Einzel- und Gruppen-Update**, aus Web-UI und Node-RED
   möglich (beide WS-Clients desselben Backends).
 - Knoten mit **A/B-Partition und Bootloader-Verify**: bootet das neue Image nicht
@@ -226,30 +233,31 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 ## 8. Open Decisions and Risks
 
-- Gateway- und Knoten-Hardware sind geklärt (§4); Provider und Repository-Bezeichner
-  für das Git-Hosting noch offen.
+- Gateway- und Knoten-Hardware sind geklärt (§4); Git-Hosting ist geklärt: GitHub,
+  vier Repos nach project.md §9.
 - Mesh-Funkstrecke: **entschieden für ESP-Mesh-Lite** – dokumentiert und
   freigegeben in [`ADR-0001`](../docs/adr/adr-0001-esp-mesh-lite.md) (v0.2.0,
   2026-10-25). Verbleibende ADR-Punkte (PoC Routing/Hop, OTA übers Mesh,
   Registry-Kompatibilität) bleiben als T-003…T-008 im Register und werden im
   M1/M2-Aufbau abgearbeitet.
 - USB-Anbindung des Gateways: als Flashen-/Logging-Pfad vorgesehen, Gegencheck offen.
-- ESP-Mesh-Lite-Verfügbarkeit als Arduino-/PlatformIO-Lib/-Wrapper: **Recherche
-  dokumentiert** in [`docs/poc/toolchain-check.md`](../docs/poc/toolchain-check.md)
-  — offizieller Pfad ist die IDF-Component, kein offizielles PlatformIO-Paket;
-  Toolchain-Pfad-ADR als T-023.
+- ESP-Mesh-Lite-Einbindung: **Toolchain-Pfad entschieden: ESP-IDF pur**
+  ( [`ADR-0004`](../docs/adr/adr-0004-esp-idf-toolchain.md), Draft), Recherche-
+  Grundlage in [`docs/poc/toolchain-check.md`](../docs/poc/toolchain-check.md).
 - Firmware-Update-Mechanik steht (HTTP-Pull, A/B-Rollback, Einzel + Gruppe); offen:
   Image-Verwaltung auf der SD (Namensschema, Versionierung, Anzahl gehaltener
   Images) und Meldungsformat für Update-Anstoß/Fortschritt.
 - Signierung von Images ist bewusst keine Voraussetzung (Secure Boot nicht
-  eingebrannt) – Sicherheitsniveau bleibt bei LAN + Login + Checksummen.
-- Webserver-Authentifizierung: Grundprinzip (Login am Gateway) steht, Zugangsweg
-  (Basic Auth, Token, Session) und ob TLS/offene Klartextverbindung im LAN noch offen.
-- Timeout-Wert für Offline-Erkennung, Größe/Dauer des Node-RED-Puffers und der
-  Antwort-/AntwortTimeout für Synchron-Telegramme noch als Parameter festzulegen.
-  Einordnung, welche Telegramme „asynchron“ vs. „synchron“ laufen, im FSPEC.
+  eingebrannt) – Sicherheitsniveau bleibt bei LAN + Basic Auth (Web) + Checksummen.
+- Webserver-Authentifizierung ist **geklärt: Basic Auth auf der Webseite**, die
+  Telegramm-/WebSocket-Ebene bleibt ohne Zugriffsschutz; Klartext im LAN ist
+  hingenommen. (2026-10-25)
+- Timeout-/Puffer-/Antwortwerte für Offline-Erkennung, Node-RED-Puffer und
+  Synchron-Antworten sind **parametrisch zu fordern**; konkrete Werte erst nach
+  PoC-Messung im FSPEC. Telegrammklassen **Kategorie für Kategorie** im
+  Nachrichtenlexikon.
 - **Gemischte Chipsatz-Matrix:** Hardware-Klassen sind geklärt (ESP32, S2, C3, C6);
-  offen bleibt die Verifikation je Board in PlatformIO/Arduino (Builds, OTA,
+  offen bleibt die Verifikation je Board in ESP-IDF (Builds, OTA,
   WebSocket, ESP-Mesh-Lite-Funktionsumfang).
 - **ESP-Mesh-Lite Wartungszusage:** bestätigt **Maintenance Mode** (2026-10-25,
   T-006 Done, Toolchain-Check) — nur Sicherheits-/Bugfix-Patches, Iteration im
@@ -289,6 +297,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.28.0 | 2026-10-25 | REQ-Kanons entschieden: sync/asyn als Telegrammtyp-Kategorien, Parameter parametrisch, Basic Auth nur Web (Telegramme ungesichert), WPA2-PSK ohne AES128, Time-Sync Node-RED-geführt, Toolchain ESP-IDF pur (ADR-0004), REQ-RED-1 als Draft. |
 | 0.27.0 | 2026-10-25 | Zeitbasis ergänzt: Time-Sync im Netzwerk, Telegramme mit Zeitstempel (§4, R-DATA-5/6 im REQ-Gerüst, T-024). |
 | 0.26.0 | 2026-10-25 | Toolchain-Check extern dokumentiert (docs/poc/toolchain-check.md, T-003 Stand/T-006 Done); REQ-Familien-Gerüst (project/req-families-outline.md) als Diskussionsentwurf; T-023 Toolchain-Pfad-ADR angelegt. |
 | 0.25.0 | 2026-10-25 | ADR-0002 Klärpunkte entschieden (ADR v0.2.0: kein Sync, <30 s Übernahme, manuelle Spiegelung, Netz-Hälfte = beobachten); ADR-0003 Prüfpunkte: Vorlagen-Check abgehakt, Kantennachweis offen. |

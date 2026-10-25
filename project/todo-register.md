@@ -17,7 +17,7 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 | T-020 | Open | Lib-Repo nur bei realem Duplikations-Trigger gründen (min. zwei betroffene Projekte, identischer Kern; dann PlatformIO-Lib mit Semver) | Repo-Aufteilung 2026-10-25 | — | erst bei Trigger |
 | T-021 | Done | Repo-/Verzeichnis-Aufteilung (Main + 3 Code-Repos als parallele Pfade, Benennung `esp32-mesh-framework*`) umgesetzt | Repo-Aufteilung 2026-10-25 | T-001 (Remote/Push) | — |
 | T-022 | Done | ADR-0003 (Cross-Repo-Traceability repo@sha) als Draft angelegt | Repo-Aufteilung 2026-10-25 | — | — |
-| T-023 | Open | ADR für den Firmware-Toolchain-Pfad: ESP-IDF pur vs. Arduino als IDF-Component vs. Third-Party-Wrapper | Toolchain-Check Befund 4 | — | vor erstem Build (M1) |
+| T-023 | Done | ADR für den Firmware-Toolchain-Pfad: ESP-IDF pur vs. Arduino als IDF-Component vs. Third-Party-Wrapper | Toolchain-Check Befund 4 | — | vor erstem Build (M1) |
 | T-002 | Open | project.md-Status klären: formal freigeben oder dauerhaft Living Context | Review 2026-10-25 | — | vor REQ-Erstellung |
 | T-003 | Open | ESP-Mesh-Lite als Arduino-/PlatformIO-Lib/-Wrapper prüfen (Version, Kompatibilität) | project.md §8 | Toolchain-Umgebung | vor M1-Implementierung; Recherche steht (docs/poc/toolchain-check.md) |
 | T-004 | Open | Build-Verifikation je Chipsatz (S2, WROOM-32, C3, C6): Builds, OTA, WebSocket, Mesh-Funktion | project.md §8 | T-003 | vor REQ-Akzeptanzkriterien |
@@ -27,12 +27,13 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 | T-008 | Open | PoC Firmware-OTA über Mesh mit realistischer Größe (Abbruch, Wiederanlauf) | ADR-0001 Checkliste | T-003 | bis M2 |
 | T-009 | Open | Relais-Anordnung im Zielgebäude planen (Ausbau >10 Knoten) | ADR-0001 Checkliste | T-007 | vor M4 |
 | T-010 | Open | USB-Anbindung Core2 als Flash-/Logging-Pfad gegenprüfen | project.md §4/§8 | — | vor erstem M1-Test |
-| T-011 | Open | Auth-Zugangsweg Webserver wählen (Basic Auth / Token / Session), Klartext vs. TLS im LAN | project.md §8 | — | vor UI-FSPEC |
-| T-012 | Open | Parameter festlegen: Offline-Timeout X, Ringpuffer-Größe/-Dauer, Sync-Antworttimeout | project.md §8 | — | im jeweiligen FSPEC |
-| T-024 | Open | Time-Sync-Verfahren festlegen: Zeitquelle (Root/NTP), Vererbung an Knoten, Verhalten/Drift ohne Gateway | Datentransport-Erweiterung 2026-10-25 | — | im Datenfluss-FSPEC |
-| T-013 | Open | Einordnungskriterium „asynchron“ vs. „synchron“ Telegramme formulieren | project.md §5/§8 | — | im Sync/Async-FSPEC |
+| T-011 | Done | Auth-Zugangsweg Webserver wählen (Basic Auth / Token / Session), Klartext vs. TLS im LAN | project.md §8 | — | vor UI-FSPEC |
+| T-012 | Done | Parameter festlegen: Offline-Timeout X, Ringpuffer-Größe/-Dauer, Sync-Antworttimeout | project.md §8 | — | im jeweiligen FSPEC |
+| T-024 | Done | Time-Sync-Verfahren festlegen: Zeitquelle (Root/NTP), Vererbung an Knoten, Verhalten/Drift ohne Gateway | Datentransport-Erweiterung 2026-10-25 | — | im Datenfluss-FSPEC |
+| T-013 | Done | Einordnungskriterium „asynchron“ vs. „synchron“ Telegramme formulieren | project.md §5/§8 | — | im Sync/Async-FSPEC |
 | T-014 | Open | Image-Verwaltung auf SD (Namensschema, Versionierung, Anzahl) + Meldungsformat Update-Anstoß/Fortschritt | project.md §8 | — | im Update-FSPEC |
-| T-015 | Open | Mesh-Sicherheitsniveau einordnen | project.md §8 | — | im Sicherheits-REQ |
-| T-016 | Open | ADR-0002 Zweck-Entscheidung: explizit „zurückgestellt bis M7“ statt Draft-Schwebezustand | Review 2026-10-25 | — | nach REQ-Vorlage |
+| T-015 | Done | Mesh-Sicherheitsniveau einordnen | project.md §8 | — | im Sicherheits-REQ |
+| T-016 | Done | ADR-0002 Zweck-Entscheidung: explizit „zurückgestellt bis M7“ statt Draft-Schwebezustand | Review 2026-10-25 | — | nach REQ-Vorlage |
 | T-017 | Done | ADR-0002-Klärpunkte falls Umfang gewählt: Übernahme, Sync-Umfang, Übernahmedauer, halbes Netz | ADR-0002 Checkliste | — | entschieden 2026-10-25 (ADR v0.2.0) |
 | T-018 | Open | Orchestrierungs-PoC CHECK-01…12 abarbeiten, Evidence nach docs/poc/evidence/ | PROC-0002 §7 | — | vor Implementierungsstart eines FSPECs |
+| T-025 | Open | Uhrstetigkeit/Uhrweiterführung der Knoten klären (interne Uhr vs. RTC, Drift, Neustartverhalten) | Time-Sync-Entscheidung 2026-10-25 | T-024 | im Knoten-FSPEC |
