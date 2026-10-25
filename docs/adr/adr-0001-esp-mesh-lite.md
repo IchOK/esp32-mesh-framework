@@ -2,7 +2,7 @@
 id: ADR-0001
 title: "Mesh-Funkstrecke: Einsatz von ESP-Mesh-Lite"
 status: Draft
-version: 0.1.0
+version: 0.2.0
 date: 2026-10-25
 ---
 
@@ -67,10 +67,13 @@ die Freigabe des ADR-Textes durch den Projektverantwortlichen erteilt ist.
   gepflegt werden.
 - WiFi-Mesh und Heim-WLAN teilen sich dasselbe 2.4-GHz-Spektrum – Koexistenz,
   Kanalwahl und Störungen müssen getestet werden.
-- Weiche, batteriebetriebene Knoten können wegen der Relais-Funktion (SoftAP
-  muss für Durchleitung aktiv bleiben) nicht trivial im Tiefschlaf arbeiten.
-- Bei Ausfallszenarien ohne Gateway muss die Firmware-Update-Architektur ohne Root
-  funktionieren – das Gateway ist nicht mehr „Pflicht“ für Updates.
+- Weiche, batteriebetriebene Knoten übernehmen ausdrücklich keine Relaisfunktion
+  (Projektgrenze, project.md §6) – der Konflikt zwischen Tiefschlaf und aktiver
+  SoftAP-Durchleitung tritt damit im Regelbetrieb nicht auf; Battery-Knoten sind
+  reine Endpunkte.
+- Firmware-Updates laufen immer vom Gateway aus angestoßen (project.md §6,
+  §5); ein Update-Pfad ohne erreichbares Gateway ist kein Erfordernis und wird
+  nicht betrachtet.
 
 # Verification / Open questions
 
@@ -80,6 +83,13 @@ die Freigabe des ADR-Textes durch den Projektverantwortlichen erteilt ist.
       Wiederanlauf).
 - [ ] Kompatibilität der geplanten IDF-Version mit der Component-Registry klären.
 - [ ] Relais-Anordnung im Zielgebäude planen (Ausbau auf >10 Knoten).
+
+# Change history
+
+| Version | Date | Change |
+|---|---|---|
+| 0.2.0 | 2026-10-25 | zwei negative Folgen entschärft per Projektentscheidung: Akku-Knoten arbeiten nicht als Relais (kein SoftAP-/Tiefschlaf-Konflikt); Update ohne Gateway ist kein Erfordernis. |
+| 0.1.0 | 2026-10-25 | Erster ADR-Entwurf mit Bewertung der Alternativen. |
 
 # Human approval
 Approver: pending  
