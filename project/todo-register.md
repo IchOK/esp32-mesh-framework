@@ -12,7 +12,7 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 
 | ID | Status | Todo | Ursprung/Kontext | Blockiert durch | Trigger |
 |---|---|---|---|---|---|
-| T-001 | Open | GitHub-Remotes für die vier Repos anlegen und ersten Push tun (öffentliche Repos, Benennung siehe project.md §9) | project.md §9/§8 | — | vor erstem Push |
+| T-001 | Done | GitHub-Remotes für die vier Repos angelegt und erster Push erfolgt (öffentliche Repos, `esp32-mesh-framework*`) | project.md §9/§8 | — | — |
 | T-019 | Done | GitHub-Login per Device-Flow eingerichtet (Account IchOK, gh 2.103.2, Git-Credential-Helper, Konfig /workspace/.tools/ghcfg) | GitHub-Frage 2026-10-25 | — | — |
 | T-020 | Open | Lib-Repo nur bei realem Duplikations-Trigger gründen (min. zwei betroffene Projekte, identischer Kern; dann PlatformIO-Lib mit Semver) | Repo-Aufteilung 2026-10-25 | — | erst bei Trigger |
 | T-021 | Done | Repo-/Verzeichnis-Aufteilung (Main + 3 Code-Repos als parallele Pfade, Benennung `esp32-mesh-framework*`) umgesetzt | Repo-Aufteilung 2026-10-25 | T-001 (Remote/Push) | — |
