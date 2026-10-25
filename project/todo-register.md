@@ -12,8 +12,11 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 
 | ID | Status | Todo | Ursprung/Kontext | Blockiert durch | Trigger |
 |---|---|---|---|---|---|
-| T-001 | Open | Git-Remote/Hosting wählen (Anbieter, Organisation, exakte Repo-Bezeichner) | project.md §8/§9 | — | vor erstem Push |
+| T-001 | Open | GitHub-Remotes für die vier Repos anlegen und ersten Push tun (öffentliche Repos, Benennung siehe project.md §9) | project.md §9/§8 | — | vor erstem Push |
 | T-019 | Done | GitHub-Login per Device-Flow eingerichtet (Account IchOK, gh 2.103.2, Git-Credential-Helper, Konfig /workspace/.tools/ghcfg) | GitHub-Frage 2026-10-25 | — | — |
+| T-020 | Open | Lib-Repo nur bei realem Duplikations-Trigger gründen (min. zwei betroffene Projekte, identischer Kern; dann PlatformIO-Lib mit Semver) | Repo-Aufteilung 2026-10-25 | — | erst bei Trigger |
+| T-021 | Done | Repo-/Verzeichnis-Aufteilung (Main + 3 Code-Repos als parallele Pfade, Benennung `esp32-mesh-framework*`) umgesetzt | Repo-Aufteilung 2026-10-25 | T-001 (Remote/Push) | — |
+| T-022 | Done | ADR-0003 (Cross-Repo-Traceability repo@sha) als Draft angelegt | Repo-Aufteilung 2026-10-25 | — | — |
 | T-002 | Open | project.md-Status klären: formal freigeben oder dauerhaft Living Context | Review 2026-10-25 | — | vor REQ-Erstellung |
 | T-003 | Open | ESP-Mesh-Lite als Arduino-/PlatformIO-Lib/-Wrapper prüfen (Version, Kompatibilität) | project.md §8 | Toolchain-Umgebung | vor ADR-0001-Freigabe |
 | T-004 | Open | Build-Verifikation je Chipsatz (S2, WROOM-32, C3, C6): Builds, OTA, WebSocket, Mesh-Funktion | project.md §8 | T-003 | vor REQ-Akzeptanzkriterien |

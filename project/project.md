@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
-title: "M5Core2 Mesh Gateway"
-version: 0.22.0
+title: "ESP32 Mesh Framework"
+version: 0.23.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -14,7 +14,7 @@ supersedes: null
 references:
   requirements: []
   functional_specs: []
-  adrs: [ADR-0001, ADR-0002]
+  adrs: [ADR-0001, ADR-0002, ADR-0003]
 review_required: []
 ---
 
@@ -33,6 +33,10 @@ Aussagen zu Akzeptanz und Verhalten stehen ausschließlich in REQ/FSPEC/ADR.
 > Structure and content guidance: [`../docs/templates/project.md`](../docs/templates/project.md).
 
 ## 1. Purpose and Vision
+
+**Projektbezeichnung:** „ESP32 Mesh Framework“ — Umbenennung aus „M5Core2 Mesh
+Gateway“ (2026-10-25); der Hardwarebezug ist austauschbar, der Kern ist das
+Mesh-Framework.
 
 Ein Gateway vermittelt zwischen dem privaten Heim-WLAN und einem
 ESP-Mesh-Netzwerk. Es nimmt Daten der Mesh-Knoten (ESP32) entgegen und
@@ -259,12 +263,15 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 ## 9. Development and Documentation Process
 
-- Versionskontrolle und Hosting: **Git mit Remote-Hosting bei GitHub (privat)**, 2026-10-25
-  entschieden; exakte Organisation/Repositor-Names noch offen (T-001). **Mehrere Repos** nach
-  Softwarestück:
-  - `gateway` – Gateway-Firmware, statische Web-UI, Update-Werkzeuge
-  - `nodes` – Knoten-Firmware (plattformübergreifend für ESP32, S2, C3, C6)
-  - `node-red-flows` – Node-RED-Flows und zugehörige Konfiguration
+- Versionskontrolle und Hosting: **Git mit Remote-Hosting bei GitHub (öffentlich)**, 2026-10-25
+  entschieden; Repos und Benennung nach Softwarestück (siehe auch ADR-0003, Cross-Repo-Traceability):
+  - `esp32-mesh-framework` – Main: Governance, Requirements, FSPEC/ADR, Reports (dieses Repo)
+  - `esp32-mesh-framework-gateway` – Gateway-Firmware (Core2), statische Web-UI, Update-Werkzeuge
+  - `esp32-mesh-framework-nodes` – Knoten-Firmware (plattformübergreifend für ESP32, S2, C3, C6)
+  - `esp32-mesh-framework-node-red` – Node-RED-Flows und eigene Nodes zur Mesh-Anbindung
+  - `esp32-mesh-framework-lib` – nur bei realem Duplikations-Trigger (mindestens zwei betroffene
+    Projekte, identischer Funktionskern); dann als PlatformIO-Bibliothek mit Semver, kein Vorabbau (T-020)
+  - Arbeitsverzeichnis-Parallelen (`../<repo>/`) statt Unterverzeichnissen; keine Submodule (Worktree-Isolation)
 - Prozessregeln: [`../docs/process/document-lifecycle.md`](../docs/process/document-lifecycle.md), [`../docs/process/multi-agent-orchestration.md`](../docs/process/multi-agent-orchestration.md)
 - [`AGENTS.md`](../AGENTS.md) — verbindliche Agenten-Anweisungen.
 - Ablauf: Idee → REQ freigegeben → FSPEC freigegeben → **expliziter
@@ -277,6 +284,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.23.0 | 2026-10-25 | Projektbenennung auf „ESP32 Mesh Framework“ gehoben (Hardware-Marker M5Core2 nur noch Hardwarebezug); §9 Repo-Struktur in `esp32-mesh-framework*` überführt, Hosting auf öffentlich festgelegt; ADR-0003 (Cross-Repo-Traceability) referenziert. |
 | 0.22.0 | 2026-10-25 | Positionierung als Living Context dokumentiert (Entscheidung 2026-10-25, P0.3); §9 Hosting konkretisiert: GitHub privat, Repo-Bezeichner offen (P0.2, T-001). |
 | 0.21.0 | 2026-10-25 | §8: Verweis auf zentrales todo-register.md (T-001 ff.); Register mit offenen Punkten befüllt (Phase 0, P0.4). |
 | 0.20.0 | 2026-10-25 | §7 Meilensteine verfeinert: Zwei-Node-Start (Core2 + SuperMini C3), Sync vor Multi-Hop, Chip-Ausbau und Async getrennt, M6–M8 für UI/Update/Redundanz. |
