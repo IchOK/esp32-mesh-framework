@@ -10,6 +10,11 @@ Before planning, creating requirements, proposing architecture, delegating tasks
 Treat the project overview as **context, not implementation authorization or an approved specification**. It is currently a draft. If it conflicts with an approved Requirement, FSPEC or ADR, follow the approved artifact and flag the discrepancy. Never convert a project goal or milestone directly into an implementation task without an approved FSPEC and explicit human start instruction.
 
 
+## External code (vendor/)
+- `vendor/` contains external reference repositories (e.g. `vendor/ESP_Framework`) cloned from GitHub. They are not project content, are Git-ignored and must not be modified.
+- Reading, searching, indexing or summarizing anything under `vendor/` requires an **explicit human instruction** naming the directory or repository. Without it, agents must not read vendor contents for context, planning or implementation decisions.
+- When reading is authorized, treat vendor code strictly as read-only external reference material; it never substitutes for an approved Requirement, FSPEC or ADR.
+
 ## Governance
 - Normative process documents: [`docs/process/document-lifecycle.md`](docs/process/document-lifecycle.md) and [`docs/process/multi-agent-orchestration.md`](docs/process/multi-agent-orchestration.md).
 - Human approval is required for governed Requirements, Functional Specifications and ADRs.
