@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.26.0
+version: 0.27.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -131,6 +131,8 @@ Functional Specifications festgelegt.
   (Node-RED-Host Raspberry Pi / Mini-PC). USB am Core2 nur für Flashen/Logging –
   Bestätigung offen.
 - Gateway ↔ Mesh-Knoten: IP über ESP-Mesh-Lite (Multi-Hop).
+- **Zeitbasis:** Time-Sync innerhalb des Netzwerkes (Root/Gateway als Zeitquelle,
+  Vererbung übers Mesh); Telegramme führen ihren Zeitstempel mit.
 - Telegramme Gateway ↔ Knoten im Auftrag von Node-RED: zwei Klassen –
   **asynchron** (Daten, ggf. gepuffert) und **synchron** (direkt an den Knoten mit
   sofortiger Rückmeldung, nicht gepuffert).
@@ -287,6 +289,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.27.0 | 2026-10-25 | Zeitbasis ergänzt: Time-Sync im Netzwerk, Telegramme mit Zeitstempel (§4, R-DATA-5/6 im REQ-Gerüst, T-024). |
 | 0.26.0 | 2026-10-25 | Toolchain-Check extern dokumentiert (docs/poc/toolchain-check.md, T-003 Stand/T-006 Done); REQ-Familien-Gerüst (project/req-families-outline.md) als Diskussionsentwurf; T-023 Toolchain-Pfad-ADR angelegt. |
 | 0.25.0 | 2026-10-25 | ADR-0002 Klärpunkte entschieden (ADR v0.2.0: kein Sync, <30 s Übernahme, manuelle Spiegelung, Netz-Hälfte = beobachten); ADR-0003 Prüfpunkte: Vorlagen-Check abgehakt, Kantennachweis offen. |
 | 0.24.0 | 2026-10-25 | ADR-0001 vom Projektverantwortlichen freigegeben (v0.2.0, 2026-10-25); §4/§8 auf approved-Fassung geführt, Vorbehalt Wartungsstatus als T-006. |

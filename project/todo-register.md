@@ -29,6 +29,7 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 | T-010 | Open | USB-Anbindung Core2 als Flash-/Logging-Pfad gegenprüfen | project.md §4/§8 | — | vor erstem M1-Test |
 | T-011 | Open | Auth-Zugangsweg Webserver wählen (Basic Auth / Token / Session), Klartext vs. TLS im LAN | project.md §8 | — | vor UI-FSPEC |
 | T-012 | Open | Parameter festlegen: Offline-Timeout X, Ringpuffer-Größe/-Dauer, Sync-Antworttimeout | project.md §8 | — | im jeweiligen FSPEC |
+| T-024 | Open | Time-Sync-Verfahren festlegen: Zeitquelle (Root/NTP), Vererbung an Knoten, Verhalten/Drift ohne Gateway | Datentransport-Erweiterung 2026-10-25 | — | im Datenfluss-FSPEC |
 | T-013 | Open | Einordnungskriterium „asynchron“ vs. „synchron“ Telegramme formulieren | project.md §5/§8 | — | im Sync/Async-FSPEC |
 | T-014 | Open | Image-Verwaltung auf SD (Namensschema, Versionierung, Anzahl) + Meldungsformat Update-Anstoß/Fortschritt | project.md §8 | — | im Update-FSPEC |
 | T-015 | Open | Mesh-Sicherheitsniveau einordnen | project.md §8 | — | im Sicherheits-REQ |

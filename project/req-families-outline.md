@@ -17,6 +17,11 @@
 - **R-DATA-2** Synchron: direktes Durchreichen + sofortige Rückmeldung, kein Puffer, kein Retry, Fehler bei nicht erreichbar
 - **R-DATA-3** Klassenzuordnung: Telegramme fallen unter eine der Klassen (Kriterium aus T-013, noch offen)
 - **R-DATA-4** Heartbeat-/Offline-Erkennung: Timeout X (Parameter im FSPEC), letzte Werte bleiben sichtbar
+- **R-DATA-5** Timestamp: **jedes Telegramm enthält seinen Zeitstempel** (Sender-/Vergleichszeit zu klären: Sendezeitpunkt vs. Gateway-Empfang)
+- **R-DATA-6** Time-Sync: das Netzwerk hält eine einheitliche Zeitebasis — Root/
+  Gateway zieht Zeit übers Heim-WLAN (NTP), Knoten übernehmen über das Mesh;
+  ohne Gateway/Internet gilt der zuletzt bekannte Stand (Drift/Plausibilität ist
+  FSPEC-Punkt, T-024)
 
 ## Familie 3 — Web-UI/Status (Gateway)
 
@@ -61,6 +66,7 @@
 | Sync/Async-Kriterium | T-013 → R-DATA-3 |
 | Timeout/Puffer-Größen | T-012 → R-DATA-2/4 |
 | Auth-Weg | T-011 → R-UI-3 |
+| Time-Sync-Verfahren (SNTP/Root, Mesh-Vererbung, Drift ohne Gateway) | T-024 → R-DATA-5/6 |
 | AES128-Entscheidung | T-015 → R-SEC-3 |
 | ADR-0002-Umfang | T-016 → Familie 7 |
 | PlatformIO-Entscheidung | T-023 (neu) → Toolchain-Rahmen |
