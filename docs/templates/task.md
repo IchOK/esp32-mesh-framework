@@ -18,7 +18,8 @@ references:
 depends_on: []
 blocked_by: []
 files_scope: []
-result_commit: null
+repository: null   # Code-Repo des Tasks, z. B. esp32-mesh-framework-gateway; null = Main-only (ADR-0003)
+result_commit: null   # bei Integration als repo@sha führen
 completed_at: null
 ---
 

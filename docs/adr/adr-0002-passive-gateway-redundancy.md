@@ -2,7 +2,7 @@
 id: ADR-0002
 title: "Gateway-Redundanz durch passives Master-Standby"
 status: Draft
-version: 0.1.0
+version: 0.2.0
 date: 2026-10-25
 ---
 
@@ -95,13 +95,31 @@ Normpunkten:**
 # Verification / Open questions
 
 - [ ] PoC: zwei Geräte im Mesh, Heartbeat-Ausfall, Übernahme durch
-      Standy, Node-RED-Anschlusswechsel.
-- [ ] Synchronisierungsumfang festlegen (Node-Tabelle, Images, Update-Stand)
-      und Übertragungsweg (Mesh-IP, wann).
-- [ ] Übernahmelaufzeit als Zielwert definieren (Rückfallwert, z. B. < 30 s).
-- [ ] Bildersynchronisation der SD-Inhalte klären.
-- [ ] Verhalten bei Netz-Hälfte: was ist „Ausfall“, wenn nur die Node-RED
-      Sicht fehlschlägt.
+      Standy, Node-RED-Anschlusswechsel. **Status:** steht aus — wird nur relevant,
+      wenn Redundanz zum Umfang wird (M8, nach Freigabe dieses ADR).
+- [x] Synchronisierungsumfang festlegen (Node-Tabelle, Images, Update-Stand)
+      und Übertragungsweg (Mesh-IP, wann). **Entschieden 2026-10-25: kein
+      Laufzeit-Sync.** Node-Sichten bauen sich beim Standby aus den eigenen
+      Mesh-Heartbeats auf; laufende Update-Kampagnen werden bei Übernahme nicht
+      fortgesetzt, sondern müssen neu angestoßen werden.
+- [x] Übernahmelaufzeit als Zielwert definieren (Rückfallwert, z. B. < 30 s).
+      **Entschlossen 2026-10-25:** Zielwert **< 30 s**; Herzschlagintervall 5 s,
+      Ausfallsicht nach 3 ausbleibenden Herzschlägen (~15 s), plus Umschaltzeit.
+- [x] Bildersynchronisation der SD-Inhalte klären. **Entschlossen 2026-10-25:**
+      **manuelle Spiegelung** beim Aufstellen (Images zu Installationszeiten auf
+      beide SD-Karten), kein Sync-Mechanismus zur Laufzeit.
+- [x] Verhalten bei Netz-Hälfte: was ist „Ausfall“, wenn nur die Node-RED
+      Sicht fehlschlägt. **Geklärt aus den normative Regeln:** nur übereinstimmende
+      Ausfallsicht (Standby und Node-RED) führt zu Übernahme; eine Sicht allein
+      bleibt Status „beobachten“ mit sichtbarer Meldung — keine Übernahme, kein
+      Doppeldienst.
+
+# Change history
+
+| Version | Date | Change |
+|---|---|---|
+| 0.2.0 | 2026-10-25 | offene Punkte geklärt (projektverantwortlich entschieden): kein Laufzeit-Sync, Übernahme < 30 s (5-s-Heartbeat, 3 Ausbleiben), manuelle Image-Spiegelung; Netz-Hälfte aus normative Regeln abgeleitet geklärt. PoC bleibt bei M8-Aufgriff. |
+| 0.1.0 | 2026-10-25 | Erster Entwurf mit Modellvergleich und normativen Regeln. |
 
 # Human approval
 Approver: pending  

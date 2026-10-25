@@ -32,5 +32,5 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 | T-014 | Open | Image-Verwaltung auf SD (Namensschema, Versionierung, Anzahl) + Meldungsformat Update-Anstoß/Fortschritt | project.md §8 | — | im Update-FSPEC |
 | T-015 | Open | Mesh-Sicherheitsniveau einordnen | project.md §8 | — | im Sicherheits-REQ |
 | T-016 | Open | ADR-0002 Zweck-Entscheidung: explizit „zurückgestellt bis M7“ statt Draft-Schwebezustand | Review 2026-10-25 | — | nach REQ-Vorlage |
-| T-017 | Open | ADR-0002-Klärpunkte falls Umfang gewählt: Übernahme, Sync-Umfang, Übernahmedauer, halbes Netz | ADR-0002 Checkliste | — | nur bei Redundanz-Umfang |
+| T-017 | Done | ADR-0002-Klärpunkte falls Umfang gewählt: Übernahme, Sync-Umfang, Übernahmedauer, halbes Netz | ADR-0002 Checkliste | — | entschieden 2026-10-25 (ADR v0.2.0) |
 | T-018 | Open | Orchestrierungs-PoC CHECK-01…12 abarbeiten, Evidence nach docs/poc/evidence/ | PROC-0002 §7 | — | vor Implementierungsstart eines FSPECs |

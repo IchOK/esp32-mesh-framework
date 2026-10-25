@@ -30,9 +30,10 @@ Dependencies, file overlaps, interfaces, expected merge effort, selected concurr
 Status: Open  
 Assigned to: unassigned  
 Depends on: none  
+Repository: esp32-mesh-framework-<gateway|nodes|node-red> (Code-Repo; Main-only tasks: none)  
 Files scope: TBD  
 Acceptance criteria: TBD  
-Result commit: none
+Result commit: none <!-- bei Integration als repo@sha, z. B. esp32-mesh-framework-gateway@a1b2c3d (ADR-0003) -->
 
 Description: TBD
 

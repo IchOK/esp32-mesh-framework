@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.24.0
+version: 0.25.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -253,10 +253,10 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 - **Flash-Größe je Board gegen A/B-Partitionen prüfen:** 4-MB-Module (S2 Mini,
   SuperMinis) halbieren den nutzbaren Anwendungsspeicher – bei voller
   Firmware-Größe ggf. eng.
-- **Gateway-Redundanz (ADR-0002, Draft):** Übernahme-Bedingungen,
-  Synchronisierungsumfang (Node-Tabelle, SD-Images, Update-Stand),
-  Übernahmelaufzeit und Verhalten bei uneinheitlicher Ausfallsicht stehen als
-  Klärpunkte im ADR.
+- **Gateway-Redundanz (ADR-0002, Draft, Klärpunkte geklärt 2026-10-25):**
+  Übernahme < 30 s (5-s-Heartbeat), kein Laufzeit-Sync, manuelle
+  Image-Spiegelung, Übernahme nur bei einvernehmlicher Ausfallsicht. Freigabe
+  und Umfangentscheidung (M8) stehen noch aus (T-016).
 - Sicherheitsniveau im Mesh
 - Die offenen Punkte dieses Abschnitts sind zentral im [`todo-register.md`](todo-register.md)
   mit IDs (T-001 ff.) geführt; §8 bleibt die fachliche Beschreibung, der Register
@@ -285,6 +285,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.25.0 | 2026-10-25 | ADR-0002 Klärpunkte entschieden (ADR v0.2.0: kein Sync, <30 s Übernahme, manuelle Spiegelung, Netz-Hälfte = beobachten); ADR-0003 Prüfpunkte: Vorlagen-Check abgehakt, Kantennachweis offen. |
 | 0.24.0 | 2026-10-25 | ADR-0001 vom Projektverantwortlichen freigegeben (v0.2.0, 2026-10-25); §4/§8 auf approved-Fassung geführt, Vorbehalt Wartungsstatus als T-006. |
 | 0.23.0 | 2026-10-25 | Projektbenennung auf „ESP32 Mesh Framework“ gehoben (Hardware-Marker M5Core2 nur noch Hardwarebezug); §9 Repo-Struktur in `esp32-mesh-framework*` überführt, Hosting auf öffentlich festgelegt; ADR-0003 (Cross-Repo-Traceability) referenziert. |
 | 0.22.0 | 2026-10-25 | Positionierung als Living Context dokumentiert (Entscheidung 2026-10-25, P0.3); §9 Hosting konkretisiert: GitHub privat, Repo-Bezeichner offen (P0.2, T-001). |
