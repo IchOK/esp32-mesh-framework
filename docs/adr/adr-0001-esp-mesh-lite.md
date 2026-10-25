@@ -1,7 +1,7 @@
 ---
 id: ADR-0001
 title: "Mesh-Funkstrecke: Einsatz von ESP-Mesh-Lite"
-status: Draft
+status: Approved
 version: 0.2.0
 date: 2026-10-25
 ---
@@ -92,5 +92,5 @@ die Freigabe des ADR-Textes durch den Projektverantwortlichen erteilt ist.
 | 0.1.0 | 2026-10-25 | Erster ADR-Entwurf mit Bewertung der Alternativen. |
 
 # Human approval
-Approver: pending  
-Approved version/date: pending
+Approver: Projektverantwortlicher (explizite Freigabe im Gespräch, 2026-10-25)  
+Approved version/date: 0.2.0 / 2026-10-25

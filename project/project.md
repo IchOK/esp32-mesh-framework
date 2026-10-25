@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.23.0
+version: 0.24.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -111,7 +111,7 @@ Functional Specifications festgelegt.
 - **Konsequenz gemischte Plattformen:** Firmware- und Routing-Komponenten
   (ESP-Mesh-Lite, OTA, WebSocket) müssen auf **vier Chipsätze** gepflegt werden –
   die beiden D1-mini-Karten teilen sich den WROOM-32 mit der Lolin32.
-- Funkstrecke: **ESP-Mesh-Lite** – Entscheidung in [`docs/adr/adr-0001-esp-mesh-lite.md`](../docs/adr/adr-0001-esp-mesh-lite.md) (Draft, Freigabe steht aus).
+- Funkstrecke: **ESP-Mesh-Lite** – Entscheidung in [`docs/adr/adr-0001-esp-mesh-lite.md`](../docs/adr/adr-0001-esp-mesh-lite.md) (approved, v0.2.0 vom 2026-10-25).
 
 ### Software
 
@@ -226,10 +226,11 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 - Gateway- und Knoten-Hardware sind geklärt (§4); Provider und Repository-Bezeichner
   für das Git-Hosting noch offen.
-- Mesh-Funkstrecke: **entschieden für ESP-Mesh-Lite** – dokumentiert in
-  [`ADR-0001`](../docs/adr/adr-0001-esp-mesh-lite.md), noch freizugeben.
-  Die geprüften Alternativen (ESP-NOW-Eigenbau, ESP-WIFI-MESH, LoRa, Zigbee,
-  WiFi-Mesh) bleiben im ADR als Kontext dokumentiert.
+- Mesh-Funkstrecke: **entschieden für ESP-Mesh-Lite** – dokumentiert und
+  freigegeben in [`ADR-0001`](../docs/adr/adr-0001-esp-mesh-lite.md) (v0.2.0,
+  2026-10-25). Verbleibende ADR-Punkte (PoC Routing/Hop, OTA übers Mesh,
+  Registry-Kompatibilität) bleiben als T-003…T-008 im Register und werden im
+  M1/M2-Aufbau abgearbeitet.
 - USB-Anbindung des Gateways: als Flashen-/Logging-Pfad vorgesehen, Gegencheck offen.
 - ESP-Mesh-Lite-Verfügbarkeit als Arduino-/PlatformIO-Lib/-Wrapper: Versions- und
   Kompatibilitätscheck offen.
@@ -247,8 +248,8 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
   offen bleibt die Verifikation je Board in PlatformIO/Arduino (Builds, OTA,
   WebSocket, ESP-Mesh-Lite-Funktionsumfang).
 - **ESP-Mesh-Lite Wartungszusage:** Repository laut Aussage in Maintenance Mode
-  (nur Sicherheits-/Bugfix-Patches) – Pflegestatus vor der finalen Freigabe von
-  ADR-0001 gegenchecken.
+  (nur Sicherheits-/Bugfix-Patches) – Pflegestatus wird als T-006 vor M1
+  gegenchecken; die ADR-0001-Freigabe steht unter diesem Vorbehalt.
 - **Flash-Größe je Board gegen A/B-Partitionen prüfen:** 4-MB-Module (S2 Mini,
   SuperMinis) halbieren den nutzbaren Anwendungsspeicher – bei voller
   Firmware-Größe ggf. eng.
@@ -284,6 +285,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.24.0 | 2026-10-25 | ADR-0001 vom Projektverantwortlichen freigegeben (v0.2.0, 2026-10-25); §4/§8 auf approved-Fassung geführt, Vorbehalt Wartungsstatus als T-006. |
 | 0.23.0 | 2026-10-25 | Projektbenennung auf „ESP32 Mesh Framework“ gehoben (Hardware-Marker M5Core2 nur noch Hardwarebezug); §9 Repo-Struktur in `esp32-mesh-framework*` überführt, Hosting auf öffentlich festgelegt; ADR-0003 (Cross-Repo-Traceability) referenziert. |
 | 0.22.0 | 2026-10-25 | Positionierung als Living Context dokumentiert (Entscheidung 2026-10-25, P0.3); §9 Hosting konkretisiert: GitHub privat, Repo-Bezeichner offen (P0.2, T-001). |
 | 0.21.0 | 2026-10-25 | §8: Verweis auf zentrales todo-register.md (T-001 ff.); Register mit offenen Punkten befüllt (Phase 0, P0.4). |
