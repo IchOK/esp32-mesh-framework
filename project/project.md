@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "M5Core2 Mesh Gateway"
-version: 0.20.0
+version: 0.21.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -248,6 +248,9 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
   Übernahmelaufzeit und Verhalten bei uneinheitlicher Ausfallsicht stehen als
   Klärpunkte im ADR.
 - Sicherheitsniveau im Mesh
+- Die offenen Punkte dieses Abschnitts sind zentral im [`todo-register.md`](todo-register.md)
+  mit IDs (T-001 ff.) geführt; §8 bleibt die fachliche Beschreibung, der Register
+  den Arbeitszustand.
 
 ## 9. Development and Documentation Process
 
@@ -269,6 +272,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.21.0 | 2026-10-25 | §8: Verweis auf zentrales todo-register.md (T-001 ff.); Register mit offenen Punkten befüllt (Phase 0, P0.4). |
 | 0.20.0 | 2026-10-25 | §7 Meilensteine verfeinert: Zwei-Node-Start (Core2 + SuperMini C3), Sync vor Multi-Hop, Chip-Ausbau und Async getrennt, M6–M8 für UI/Update/Redundanz. |
 | 0.19.0 | 2026-10-25 | §7 Meilensteine auf den aktuellen Stand gebracht (Toolchain-Check, Sync/Async, Gruppen-Update, optionale Redundanz). |
 | 0.18.0 | 2026-10-25 | §6-Kommentare eingearbeitet: Funktionsbeschreibung nach §1 verlagert, Non-Goal auf „keine Auto-Update-Funktion auf Knotenebene“ gekürzt. |
