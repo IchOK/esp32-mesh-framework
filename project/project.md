@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "M5Core2 Mesh Gateway"
-version: 0.21.0
+version: 0.22.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -24,6 +24,11 @@ review_required: []
 It does not replace approved requirements, functional specifications, or ADRs.
 Statements about concrete components reflect the current planning state, not
 immutable rules.
+
+**Führung als Living Context (Entscheidung 2026-10-25):** Dieses Dokument wird
+laufend weitergepflegt und nicht auf einem Referenzstand eingefroren; REQs und
+FSPECs referenzieren die jeweils aktuelle Fassung als Kontext. Verbindliche
+Aussagen zu Akzeptanz und Verhalten stehen ausschließlich in REQ/FSPEC/ADR.
 
 > Structure and content guidance: [`../docs/templates/project.md`](../docs/templates/project.md).
 
@@ -254,8 +259,8 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 ## 9. Development and Documentation Process
 
-- Versionskontrolle und Hosting: **Git mit Remote-Hosting** (privat, z. B. GitHub;
-  exakter Anbieter/Repositor names noch offen). **Mehrere Repos** nach
+- Versionskontrolle und Hosting: **Git mit Remote-Hosting bei GitHub (privat)**, 2026-10-25
+  entschieden; exakte Organisation/Repositor-Names noch offen (T-001). **Mehrere Repos** nach
   Softwarestück:
   - `gateway` – Gateway-Firmware, statische Web-UI, Update-Werkzeuge
   - `nodes` – Knoten-Firmware (plattformübergreifend für ESP32, S2, C3, C6)
@@ -272,6 +277,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.22.0 | 2026-10-25 | Positionierung als Living Context dokumentiert (Entscheidung 2026-10-25, P0.3); §9 Hosting konkretisiert: GitHub privat, Repo-Bezeichner offen (P0.2, T-001). |
 | 0.21.0 | 2026-10-25 | §8: Verweis auf zentrales todo-register.md (T-001 ff.); Register mit offenen Punkten befüllt (Phase 0, P0.4). |
 | 0.20.0 | 2026-10-25 | §7 Meilensteine verfeinert: Zwei-Node-Start (Core2 + SuperMini C3), Sync vor Multi-Hop, Chip-Ausbau und Async getrennt, M6–M8 für UI/Update/Redundanz. |
 | 0.19.0 | 2026-10-25 | §7 Meilensteine auf den aktuellen Stand gebracht (Toolchain-Check, Sync/Async, Gruppen-Update, optionale Redundanz). |

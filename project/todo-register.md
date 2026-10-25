@@ -13,6 +13,7 @@ verlangt, wird er als Todo gehalten, bis der Freigabezyklus beginnt.
 | ID | Status | Todo | Ursprung/Kontext | Blockiert durch | Trigger |
 |---|---|---|---|---|---|
 | T-001 | Open | Git-Remote/Hosting wählen (Anbieter, Organisation, exakte Repo-Bezeichner) | project.md §8/§9 | — | vor erstem Push |
+| T-019 | Done | GitHub-Login per Device-Flow eingerichtet (Account IchOK, gh 2.103.2, Git-Credential-Helper, Konfig /workspace/.tools/ghcfg) | GitHub-Frage 2026-10-25 | — | — |
 | T-002 | Open | project.md-Status klären: formal freigeben oder dauerhaft Living Context | Review 2026-10-25 | — | vor REQ-Erstellung |
 | T-003 | Open | ESP-Mesh-Lite als Arduino-/PlatformIO-Lib/-Wrapper prüfen (Version, Kompatibilität) | project.md §8 | Toolchain-Umgebung | vor ADR-0001-Freigabe |
 | T-004 | Open | Build-Verifikation je Chipsatz (S2, WROOM-32, C3, C6): Builds, OTA, WebSocket, Mesh-Funktion | project.md §8 | T-003 | vor REQ-Akzeptanzkriterien |
