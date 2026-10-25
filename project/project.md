@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.25.0
+version: 0.26.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -232,8 +232,10 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
   Registry-Kompatibilität) bleiben als T-003…T-008 im Register und werden im
   M1/M2-Aufbau abgearbeitet.
 - USB-Anbindung des Gateways: als Flashen-/Logging-Pfad vorgesehen, Gegencheck offen.
-- ESP-Mesh-Lite-Verfügbarkeit als Arduino-/PlatformIO-Lib/-Wrapper: Versions- und
-  Kompatibilitätscheck offen.
+- ESP-Mesh-Lite-Verfügbarkeit als Arduino-/PlatformIO-Lib/-Wrapper: **Recherche
+  dokumentiert** in [`docs/poc/toolchain-check.md`](../docs/poc/toolchain-check.md)
+  — offizieller Pfad ist die IDF-Component, kein offizielles PlatformIO-Paket;
+  Toolchain-Pfad-ADR als T-023.
 - Firmware-Update-Mechanik steht (HTTP-Pull, A/B-Rollback, Einzel + Gruppe); offen:
   Image-Verwaltung auf der SD (Namensschema, Versionierung, Anzahl gehaltener
   Images) und Meldungsformat für Update-Anstoß/Fortschritt.
@@ -247,9 +249,9 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 - **Gemischte Chipsatz-Matrix:** Hardware-Klassen sind geklärt (ESP32, S2, C3, C6);
   offen bleibt die Verifikation je Board in PlatformIO/Arduino (Builds, OTA,
   WebSocket, ESP-Mesh-Lite-Funktionsumfang).
-- **ESP-Mesh-Lite Wartungszusage:** Repository laut Aussage in Maintenance Mode
-  (nur Sicherheits-/Bugfix-Patches) – Pflegestatus wird als T-006 vor M1
-  gegenchecken; die ADR-0001-Freigabe steht unter diesem Vorbehalt.
+- **ESP-Mesh-Lite Wartungszusage:** bestätigt **Maintenance Mode** (2026-10-25,
+  T-006 Done, Toolchain-Check) — nur Sicherheits-/Bugfix-Patches, Iteration im
+  privaten Repo. Versionsbindung auf v1.0.x + IDF 5.x pflegen.
 - **Flash-Größe je Board gegen A/B-Partitionen prüfen:** 4-MB-Module (S2 Mini,
   SuperMinis) halbieren den nutzbaren Anwendungsspeicher – bei voller
   Firmware-Größe ggf. eng.
@@ -285,6 +287,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.26.0 | 2026-10-25 | Toolchain-Check extern dokumentiert (docs/poc/toolchain-check.md, T-003 Stand/T-006 Done); REQ-Familien-Gerüst (project/req-families-outline.md) als Diskussionsentwurf; T-023 Toolchain-Pfad-ADR angelegt. |
 | 0.25.0 | 2026-10-25 | ADR-0002 Klärpunkte entschieden (ADR v0.2.0: kein Sync, <30 s Übernahme, manuelle Spiegelung, Netz-Hälfte = beobachten); ADR-0003 Prüfpunkte: Vorlagen-Check abgehakt, Kantennachweis offen. |
 | 0.24.0 | 2026-10-25 | ADR-0001 vom Projektverantwortlichen freigegeben (v0.2.0, 2026-10-25); §4/§8 auf approved-Fassung geführt, Vorbehalt Wartungsstatus als T-006. |
 | 0.23.0 | 2026-10-25 | Projektbenennung auf „ESP32 Mesh Framework“ gehoben (Hardware-Marker M5Core2 nur noch Hardwarebezug); §9 Repo-Struktur in `esp32-mesh-framework*` überführt, Hosting auf öffentlich festgelegt; ADR-0003 (Cross-Repo-Traceability) referenziert. |
