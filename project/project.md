@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.29.0
+version: 0.30.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -142,7 +142,9 @@ Functional Specifications festgelegt.
   zwei Klassen – **asynchron** (einfaches Senden, keine Rückmeldung erwartet;
   z. B. zyklische Meldungen, Parameteranpassungen) und **synchron** (senden und
   Rückmeldung abwarten; z. B. Schaltbefehle). Bleibt die Rückmeldung aus,
-  entscheidet der **Absender** über das weitere Vorgehen.
+  entscheidet der **Absender** über das weitere Vorgehen. Asynchrone
+  Telegramme an Knoten erfordern zusätzlich eine **Empfangsquittung** als
+  Zustellnachweis, ohne inhaltliche Rückmeldung (REQ-0012).
 - Gateway-Redundanz (Konzept ADR-0002, Draft): Master und Standby-Pair – Master
   als Dienstgeber in Mesh und Node-RED, Standby als normaler Mesh-Knoten mit
   Standby-Kennung gegenüber Node-RED; Kopplung über Heartbeats, Übernahme nur
@@ -300,6 +302,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.30.0 | 2026-10-26 | Empfangsquittung für asynchrone Telegramme ergänzt (REQ-0012): nur Zugang bestätigt, Ausbleiben = nicht zugestellt ohne Offline-Vorabinformation, koppelt an REQ-0011. |
 | 0.29.0 | 2026-10-26 | Sync/Async als allgemeine Telegrammeigenschaft festgeschrieben (nicht Node-RED-spezifisch): async ohne Rückmeldungserwartung, sync mit Rückmeldung, bei Ausbleiben entscheidet der Absender. REQ-0005 v0.2.0. |
 | 0.28.0 | 2026-10-25 | REQ-Kanons entschieden: sync/asyn als Telegrammtyp-Kategorien, Parameter parametrisch, Basic Auth nur Web (Telegramme ungesichert), WPA2-PSK ohne AES128, Time-Sync Node-RED-geführt, Toolchain ESP-IDF pur (ADR-0004), REQ-RED-1 als Draft. |
 | 0.27.0 | 2026-10-25 | Zeitbasis ergänzt: Time-Sync im Netzwerk, Telegramme mit Zeitstempel (§4, R-DATA-5/6 im REQ-Gerüst, T-024). |

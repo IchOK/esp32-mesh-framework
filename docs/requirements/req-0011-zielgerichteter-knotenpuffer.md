@@ -19,7 +19,9 @@ eine Pufferung, die **pro Zielknoten** entfällt, nicht global.
 # Requirement
 
 Kann ein **asynchrones** Telegramm von Node-RED an einen Knoten nicht
-zugestellt werden (Knoten offline, erreichbarkeitsseitig getrennt), puffert
+zugestellt werden (Knoten offline, erreichbarkeitsseitig getrennt — die
+fehlende Empfangsquittung nach REQ-0012 ist der unmittelbare Beleg, auch vor
+einer Offline-Erkennung), puffert
 das Gateway es **nach Zielknoten getrennt**. Die Anforderungen im Einzelnen:
 
 1. **Zielisolierung:** Die Warteschlange je Knoten ist unabhängig voneinander.
