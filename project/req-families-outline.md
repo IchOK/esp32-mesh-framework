@@ -22,9 +22,12 @@
 ## Familie 2 — Datentransport (Gateway ↔ Mesh ↔ Node-RED)
 
 - **REQ-0004 (R-DATA-1)** Asynchron: Knotendaten→Node-RED, mit Ringpuffer bei Node-RED-Trennung + Reihenfolge beim Wiederaufbau
-- **REQ-0005 (R-DATA-2)** Synchron: direktes Durchreichen + sofortige Rückmeldung, kein Puffer, kein Retry, Fehler bei nicht erreichbar
+- **REQ-0005 (R-DATA-2)** Synchron: Rückmeldung abwarten, Fehler bei nicht
+  erreichbar, kein zentrales Retry — **bei Ausbleiben entscheidet der Absender**;
+  Klassifikation gilt systemweit, auch Knoten↔Knoten (2026-10-26)
 - **REQ-0006 (R-DATA-3)** Klassenzuordnung: **keine Grundregel** — jeder Telegrammtyp wird
-  im Nachrichtenlexikon einzeln als synchron/asynchron klassifiziert (2026-10-25)
+  im Nachrichtenlexikon einzeln als synchron/asynchron klassifiziert (2026-10-25),
+  und zwar für jede Telegrammbeziehung, nicht nur die Node-RED-Schiene (2026-10-26)
 - **REQ-0007 (R-DATA-4)** Heartbeat-/Offline-Erkennung: Timeout als **parametrisch** formuliert
   (Werte erst nach PoC-Messungen im FSPEC, 2026-10-25), letzte Werte bleiben sichtbar
 - **REQ-0008 (R-DATA-5)** Timestamp: **jedes Telegramm enthält seinen Zeitstempel**

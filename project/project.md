@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.28.0
+version: 0.29.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -138,9 +138,11 @@ Functional Specifications festgelegt.
   Node-RED sendet über das Gateway ein besonderes Time-Sync-Telegramm an alle
   Knoten; die Knoten führen die Zeit danach selbst weiter. Telegramme führen
   ihren Zeitstempel mit (RTC-/Stetigkeitsfrage → T-025).
-- Telegramme Gateway ↔ Knoten im Auftrag von Node-RED: zwei Klassen –
-  **asynchron** (Daten, ggf. gepuffert) und **synchron** (direkt an den Knoten mit
-  sofortiger Rückmeldung, nicht gepuffert).
+- Telegramme im Gesamtsystem (Knoten↔Knoten, Knoten↔Gateway, Gateway↔Node-RED):
+  zwei Klassen – **asynchron** (einfaches Senden, keine Rückmeldung erwartet;
+  z. B. zyklische Meldungen, Parameteranpassungen) und **synchron** (senden und
+  Rückmeldung abwarten; z. B. Schaltbefehle). Bleibt die Rückmeldung aus,
+  entscheidet der **Absender** über das weitere Vorgehen.
 - Gateway-Redundanz (Konzept ADR-0002, Draft): Master und Standby-Pair – Master
   als Dienstgeber in Mesh und Node-RED, Standby als normaler Mesh-Knoten mit
   Standby-Kennung gegenüber Node-RED; Kopplung über Heartbeats, Übernahme nur
@@ -172,12 +174,13 @@ Functional Specifications festgelegt.
   Wiederaufbau der WebSocket-Verbindung der Reihenfolge nach nach. **Synchron
   gekennzeichnete Telegramme werden nicht gepuffert** – ohne bestehende Verbindung
   können sie nicht gestellt oder beantwortet werden.
-- **Synchron-Telegramme:** Von Node-RED als synchron gekennzeichnete Telegramme
-  leitet das Gateway direkt an den Mesh-Knoten weiter und gibt dessen Rückmeldung
-  (Erfolg/Ergebnis) unverzüglich an Node-RED zurück. Ist der Knoten nicht
-  erreichbar, antwortet das Gateway sofort mit einer Fehler-Rückmeldung – der
-  Auftrag wird nicht zwischengespeichert, nicht erneut versucht und nicht
-  nachgeliefert.
+- **Synchron-Telegramme:** Der Absender sendet und wartet auf die Rückmeldung
+  des Empfängers (Erfolg/Ergebnis). Durchleitende Stellen wie das Gateway
+  leiten unverzüglich zu, geben die Rückmeldung des Empfängers sofort zurück
+  und antworten bei nicht erreichbarem Empfänger sofort mit einer
+  Fehler-Rückmeldung. Synchron wird nicht gepuffert, nicht zentral erneut
+  versucht und nicht nachgeliefert – bleibt die Rückmeldung aus, entscheidet
+  der Absender, wie weiterfahren wird.
 - **Knoten nicht erreichbar:** Das Gateway führt für jeden Knoten einen
   Heartbeat-/Zeitstempel-Timeout; nach X Sekunden ohne Meldung (Wert offen) gilt
   der Knoten als **offline**. Die letzten Werte bleiben mit Zeitstempel in UI und
@@ -297,6 +300,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.29.0 | 2026-10-26 | Sync/Async als allgemeine Telegrammeigenschaft festgeschrieben (nicht Node-RED-spezifisch): async ohne Rückmeldungserwartung, sync mit Rückmeldung, bei Ausbleiben entscheidet der Absender. REQ-0005 v0.2.0. |
 | 0.28.0 | 2026-10-25 | REQ-Kanons entschieden: sync/asyn als Telegrammtyp-Kategorien, Parameter parametrisch, Basic Auth nur Web (Telegramme ungesichert), WPA2-PSK ohne AES128, Time-Sync Node-RED-geführt, Toolchain ESP-IDF pur (ADR-0004), REQ-RED-1 als Draft. |
 | 0.27.0 | 2026-10-25 | Zeitbasis ergänzt: Time-Sync im Netzwerk, Telegramme mit Zeitstempel (§4, R-DATA-5/6 im REQ-Gerüst, T-024). |
 | 0.26.0 | 2026-10-25 | Toolchain-Check extern dokumentiert (docs/poc/toolchain-check.md, T-003 Stand/T-006 Done); REQ-Familien-Gerüst (project/req-families-outline.md) als Diskussionsentwurf; T-023 Toolchain-Pfad-ADR angelegt. |
