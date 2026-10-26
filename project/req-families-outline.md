@@ -97,3 +97,4 @@
 | Toolchain-Pfad | Geklärt: ESP-IDF pur, ADR-0004 (T-023) |
 | Time-Sync | Geklärt: Node-RED-getrieben, Knoten führen Uhr selbst (T-024) |
 | RTC-/Uhrstetigkeit | Neu T-025 → R-DATA-6, FSPEC Knoten-Firmware |
+| Sync-Pufferung | Bestätigt 2026-10-26: Sync-Telegramme aus Node-RED werden grundsätzlich nicht gepuffert — keine Ausnahme |
