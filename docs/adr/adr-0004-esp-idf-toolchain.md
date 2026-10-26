@@ -2,7 +2,7 @@
 id: ADR-0004
 title: "Firmware-Toolchain: ESP-IDF pur mit ESP-Mesh-Lite als Component"
 status: Draft
-version: 0.2.0
+version: 0.2.1
 date: 2026-10-25
 ---
 
@@ -22,15 +22,15 @@ Der Toolchain-Check (`docs/poc/toolchain-check.md`) ergab:
 
 **Wir bauen beide Firmware-Repos als reine ESP-IDF-Projekte:**
 
-1. Fest gepinnte **ESP-IDF 5.4** auf exakter Stufe **`v5.4.4-1485-g7fd24a20fdc`**
-   (Standard-Build-Umgebung, Punkt 5) und
+1. Fest gepinnte **ESP-IDF `v5.4.4`** (Release-Stufe, ohne Build- oder
+   Versions-Hash; Standard-Build-Umgebung, Punkt 5) und
    **espressif/mesh_lite v1.0.1** als registrierte Component.
 2. Keine Arduino- oder PlatformIO-Frameworks; PlatformIO darf nur als
    **IDE/Ablage-Drehscheibe** (`platform- espressif` als reiner IDF-Installer)
    genutzt werden, wenn es den Build nicht verändert.
 3. Versionsbindung liegt pro Repo in einer dokumentierten Toolchain-Datei
-   (`toolchain.lock`): exakte IDF-Stufe (`IDF_VER` bzw. `git describe`,
-   nicht nur „5.4“), Tag des Standard-Images und Component-Pins. Pflege
+   (`toolchain.lock`): IDF-Stufe `v5.4.4` ohne Build-/Hash-Zusatz, Tag des
+   Standard-Images und Component-Pins. Pflege
    analog zum Wartungsvorbehalt aus ADR-0001.
 4. project.md-Einordnung „Arduino/PlatformIO“ ist damit auf ESP-IDF pur gehoben.
 5. **Standard-Build-Umgebung ist der Projekt-Container** (Ubuntu/glibc,
