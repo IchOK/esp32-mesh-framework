@@ -11,15 +11,15 @@ implemented_in:
 
 # Motivation
 
-project.md §2 Ziel „Mesh ohne Gateway betriebsfähig“: Der Knotenaustausch darf
-nicht am Gateway als Pflichtteil hängen bleiben.
+project.md §2, Ziel „Mesh ohne Gateway betriebsfähig“: Der Datenaustausch der
+Knoten darf nicht vom Gateway als Pflichtteil abhängen.
 
 # Requirement
 
-Vertauscht der Meshverbund das Gateway (ausgeschaltet, getauscht, getrennt),
-müssen alle verbliebenen Knoten weiterhin untereinander Daten austauschen
-können. Der Datenaustausch zwischen Knoten darf zu keinem Zeitpunkt vom
-Vorhandensein oder Erreichen des Gateways abhängen.
+Ob das Gateway dem Meshverbund entzogen wird (ausgeschaltet, getauscht oder
+nur getrennt) – alle verbliebenen Knoten müssen weiterhin untereinander Daten
+austauschen können. Der Datenaustausch zwischen Knoten darf zu keinem Zeitpunkt
+vom Vorhandensein oder Erreichen des Gateways abhängen.
 
 # Rationale
 
@@ -30,8 +30,8 @@ Root nur Vermittler nach außen, nicht Dreh- und Angelpunkt.
 # Verification
 
 Zwei Knoten tauschen Nachrichten (Messwert senden, Antwort), während das
-Gateway stromlos ist. Danach Gateway einschalten: der Austausch bleibt stabil,
-Gateway-Anbindung wächst ohne Neustart der Knoten hinzu.
+Gateway stromlos ist. Nach dem Einschalten des Gateways bleibt der Austausch
+stabil, und die Gateway-Anbindung wächst ohne Neustart der Knoten hinzu.
 
 # Human approval
 Approver: pending  
