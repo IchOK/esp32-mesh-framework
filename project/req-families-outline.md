@@ -5,14 +5,17 @@
 > später saubere FSPEC-Andockpunkte haben. Nummern (REQ-00xx) erst bei Draft-Anlage.
 >
 > **Nummerierung (2026-10-26):** global aufsteigend statt family-basiert.
-> Angelegte Drafts: REQ-0001…REQ-0003 (Familie 1), REQ-0004…REQ-0009 (Familie 2).
-> Weitere Familien steigen bei REQ-0010.
+> Angelegte Drafts: REQ-0001…REQ-0003 (Familie 1), REQ-0004…REQ-0009 (Familie 2),
+> REQ-0010 (Familie 1, nachgezogen). Weitere steigen bei REQ-0011.
 
 ## Familie 1 — Mesh-Betrieb (Grundfunktion)
 
 - **REQ-0001 (R-MESH-1)** Multi-Hop: Knoten außerhalb Gateway-Reichweite liefert über Nachbarn (Ziel §2)
 - **REQ-0002 (R-MESH-2)** Gatewayloser Betrieb: Datenaustausch zwischen Knoten ohne Gateway (Ziel §2)
-- **REQ-0003 (R-MESH-3)** Selbstorganisation/Heilung: Netzwerk baut sich ohne manuellen Eingriff (Referanz User_Guide: Provisioning/Repair)
+- **REQ-0003 (R-MESH-3)** Selbstorganisation/Heilung: Netzwerk baut sich ohne manuellen Eingriff (Referenz User_Guide: Provisioning/Repair)
+- **REQ-0010 (R-MESH-4)**: Knoteneinrichtung über knoteneigenen Mini-Webserver;
+  AP-Hilfsmodus bei fehlender oder verstellter Mesh-Konfiguration oder
+  Verbindungsunfähigkeit über einen parametrischen Zeitraum
 - Messgrößen: Repair < 50 s, Provisioning < 60 s (Toolchain-Check Befund 6)
 
 ## Familie 2 — Datentransport (Gateway ↔ Mesh ↔ Node-RED)
