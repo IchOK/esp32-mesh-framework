@@ -6,7 +6,8 @@
 >
 > **Nummerierung (2026-10-26):** global aufsteigend statt family-basiert.
 > Angelegte Drafts: REQ-0001…REQ-0003 (Familie 1), REQ-0004…REQ-0009 (Familie 2),
-> REQ-0010 (Familie 1, nachgezogen). Weitere steigen bei REQ-0011.
+> REQ-0010 (Familie 1, nachgezogen), REQ-0011 (Familie 2, nachgezogen).
+> Weitere steigen bei REQ-0012.
 
 ## Familie 1 — Mesh-Betrieb (Grundfunktion)
 
@@ -31,6 +32,10 @@
   Time-Sync-Telegramm an alle Knoten; die Knoten führen die Zeit danach selbst
   weiter (Uhrstetigkeit/RTC-Frage als FSPEC-Punkt, T-025). Ohne Node-RED-Bezug:
   zuletzt bekannte Zeit mit Flag „nicht referenziert“ (2026-10-25)
+- **REQ-0011 (R-DATA-7)** Zielgerichteter Knotenpuffer abwärts: asynchrone
+  Node-RED-Telegramme an nicht erreichbare Knoten werden **pro Zielknoten**
+  gepuffert, zeitliche Reihenfolge je Ziel, Wiederaufnahme nur der
+  Wiedergegangenen, Überlauf mit Ring-Semantik je Ziel (2026-10-26)
 
 ## Familie 3 — Web-UI/Status (Gateway)
 
