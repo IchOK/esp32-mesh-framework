@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.31.0
+version: 0.32.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -249,8 +249,11 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
   M1/M2-Aufbau abgearbeitet.
 - USB-Anbindung des Gateways: als Flashen-/Logging-Pfad vorgesehen, Gegencheck offen.
 - ESP-Mesh-Lite-Einbindung: **Toolchain-Pfad entschieden: ESP-IDF pur**
-  ( [`ADR-0004`](../docs/adr/adr-0004-esp-idf-toolchain.md), Draft), Recherche-
-  Grundlage in [`docs/poc/toolchain-check.md`](../docs/poc/toolchain-check.md).
+  ( [`ADR-0004`](../docs/adr/adr-0004-esp-idf-toolchain.md), Draft v0.2.0),
+  Recherche-Grundlage in [`docs/poc/toolchain-check.md`](../docs/poc/toolchain-check.md).
+  Pin: **IDF exakt `v5.4.4-1485-g7fd24a20fdc`** (nicht „5.4“ generisch);
+  Standard-Build-Umgebung ist der Projekt-Container, Builds laufen im
+  betroffenen Firmware-Teilprojekt.
 - Firmware-Update-Mechanik steht (HTTP-Pull, A/B-Rollback, Einzel + Gruppe); offen:
   Image-Verwaltung auf der SD (Namensschema, Versionierung, Anzahl gehaltener
   Images) und Meldungsformat für Update-Anstoß/Fortschritt.
@@ -304,6 +307,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.32.0 | 2026-10-26 | ADR-0004 Finalfassung v0.2.0: Pin exakt `v5.4.4-1485-g7fd24a20fdc`, Standard-Build-Umgebung = Projekt-Container, Builds im Firmware-Teilprojekt; `docs/poc/container-build/` (überholter Vorschlag) gelöscht. |
 | 0.31.0 | 2026-10-26 | Kommentare aus Review REQ-0005/-0009: asynchrone Definition nach REQ-0004 verlagert, Time-Sync als Broadcast, Flag „nicht referenziert“ erst nach längerem parametrischem Ausbleiben. |
 | 0.30.0 | 2026-10-26 | Empfangsquittung für asynchrone Telegramme ergänzt (REQ-0012): nur Zugang bestätigt, Ausbleiben = nicht zugestellt ohne Offline-Vorabinformation, koppelt an REQ-0011. |
 | 0.29.0 | 2026-10-26 | Sync/Async als allgemeine Telegrammeigenschaft festgeschrieben (nicht Node-RED-spezifisch): async ohne Rückmeldungserwartung, sync mit Rückmeldung, bei Ausbleiben entscheidet der Absender. REQ-0005 v0.2.0. |

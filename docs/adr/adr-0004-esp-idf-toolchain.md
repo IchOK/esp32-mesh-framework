@@ -2,7 +2,7 @@
 id: ADR-0004
 title: "Firmware-Toolchain: ESP-IDF pur mit ESP-Mesh-Lite als Component"
 status: Draft
-version: 0.1.0
+version: 0.2.0
 date: 2026-10-25
 ---
 
@@ -22,15 +22,23 @@ Der Toolchain-Check (`docs/poc/toolchain-check.md`) ergab:
 
 **Wir bauen beide Firmware-Repos als reine ESP-IDF-Projekte:**
 
-1. Fest gepinnte **ESP-IDF 5.3 oder 5.4** (Entscheidung pro Repo identisch) und
+1. Fest gepinnte **ESP-IDF 5.4** auf exakter Stufe **`v5.4.4-1485-g7fd24a20fdc`**
+   (Standard-Build-Umgebung, Punkt 5) und
    **espressif/mesh_lite v1.0.1** als registrierte Component.
 2. Keine Arduino- oder PlatformIO-Frameworks; PlatformIO darf nur als
    **IDE/Ablage-Drehscheibe** (`platform- espressif` als reiner IDF-Installer)
    genutzt werden, wenn es den Build nicht verändert.
 3. Versionsbindung liegt pro Repo in einer dokumentierten Toolchain-Datei
-   (z. B. `toolchain.lock`/README), Pflege analog zum Wartungsvorbehalt aus
-   ADR-0001.
+   (`toolchain.lock`): exakte IDF-Stufe (`IDF_VER` bzw. `git describe`,
+   nicht nur „5.4“), Tag des Standard-Images und Component-Pins. Pflege
+   analog zum Wartungsvorbehalt aus ADR-0001.
 4. project.md-Einordnung „Arduino/PlatformIO“ ist damit auf ESP-IDF pur gehoben.
+5. **Standard-Build-Umgebung ist der Projekt-Container** (Ubuntu/glibc,
+   aarch64; ESP-IDF unter `/opt/esp/idf`, OpenCode in derselben Umgebung).
+   Alle Worker-Builds laufen **direkt im betroffenen Firmware-Teilprojekt**
+   (Worktree von `esp32-mesh-framework-gateway` bzw.
+   `esp32-mesh-framework-nodes`), nicht in temporären Verzeichnissen und
+   nicht auf separaten Build-Nodes.
 
 # Alternatives
 
@@ -49,15 +57,20 @@ Der Toolchain-Check (`docs/poc/toolchain-check.md`) ergab:
 
 **Zu managen:**
 
-- Build-Umgebung braucht saubere Verankerung (Docker/venv-Anleitung je Repo
-  empfohlen, sonst reproduzieren sich Fehler nicht).
+- Der Container stellt nur die Toolchain-Basis; `toolchain.lock` je Repo muss
+  die exakte Stufe nachziehen, wenn das Bild aktualisiert wird (sonst baut
+  der Lock eine Umgebung, die niemand mehr hat).
 - Erfahrene Arduino-Entwickler im Projekt müssen sich auf IDF-Struktur
   (CMake, components) umstellen — Lernkosten, aber nur einmal.
 
 # Verification / Open questions
 
+- [x] Grundbuild im Standard-Container verifiziert: `hello_world` erfolgreich
+      für `esp32` und `esp32c3` gebaut (2026-10-26, Smoke-Test).
 - [ ] „Hello mesh_lite“ Build je Plattformfamilie (S2, ESP32, C3, C6) in
       Versionierungsform — Teil von T-004.
+- [ ] Core2-Peripherie (AXP192, Display, SD) unter reinem IDF — T-004,
+      bleibt als Risiko-Marker bis zur Verifikation.
 
 # Human approval
 
