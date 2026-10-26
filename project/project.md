@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.33.0
+version: 0.34.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -249,7 +249,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
   M1/M2-Aufbau abgearbeitet.
 - USB-Anbindung des Gateways: als Flashen-/Logging-Pfad vorgesehen, Gegencheck offen.
 - ESP-Mesh-Lite-Einbindung: **Toolchain-Pfad entschieden: ESP-IDF pur**
-  ( [`ADR-0004`](../docs/adr/adr-0004-esp-idf-toolchain.md), Draft v0.2.0),
+  ( [`ADR-0004`](../docs/adr/adr-0004-esp-idf-toolchain.md), **Approved v0.2.1**),
   Recherche-Grundlage in [`docs/poc/toolchain-check.md`](../docs/poc/toolchain-check.md).
   Pin: **IDF `v5.4.4`** (Release-Stufe, ohne Build-/Versions-Hash);
   Standard-Build-Umgebung ist der Projekt-Container, Builds laufen im
@@ -307,6 +307,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.34.0 | 2026-10-26 | ADR-0004 freigegeben (v0.2.1). REQ-Familien 3–6 als Drafts angelegt: REQ-0013…REQ-0025 (Web-UI/Status, Firmware-Update, Betrieb/Ausfall, Sicherheitsrahmen); R-UI-3 nach REQ-0024 (Familie 6) gelegt. |
 | 0.33.0 | 2026-10-26 | ADR-0004-Kommentar: Pin auf **`v5.4.4`** (Release-Stufe) reduziert, Build-/Versions-Hash `1485-g7fd24…` gestrichen; toolchain.lock führt nur noch Stufe, Image-Tag und Component-Pins. |
 | 0.32.0 | 2026-10-26 | ADR-0004 Finalfassung v0.2.0: Pin exakt `v5.4.4-1485-g7fd24a20fdc`, Standard-Build-Umgebung = Projekt-Container, Builds im Firmware-Teilprojekt; `docs/poc/container-build/` (überholter Vorschlag) gelöscht. |
 | 0.31.0 | 2026-10-26 | Kommentare aus Review REQ-0005/-0009: asynchrone Definition nach REQ-0004 verlagert, Time-Sync als Broadcast, Flag „nicht referenziert“ erst nach längerem parametrischem Ausbleiben. |

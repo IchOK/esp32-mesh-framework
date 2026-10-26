@@ -1,7 +1,7 @@
 ---
 id: ADR-0004
 title: "Firmware-Toolchain: ESP-IDF pur mit ESP-Mesh-Lite als Component"
-status: Draft
+status: Approved
 version: 0.2.1
 date: 2026-10-25
 ---
@@ -74,5 +74,5 @@ Der Toolchain-Check (`docs/poc/toolchain-check.md`) ergab:
 
 # Human approval
 
-Approver: pending  
-Approved version/date: pending
+Approver: IchOK (Nutzer)  
+Approved version/date: v0.2.1 / 2026-10-26

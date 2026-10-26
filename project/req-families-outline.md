@@ -6,8 +6,10 @@
 >
 > **Nummerierung (2026-10-26):** global aufsteigend statt family-basiert.
 > Angelegte Drafts: REQ-0001…REQ-0003 (Familie 1), REQ-0004…REQ-0009 (Familie 2),
-> REQ-0010 (Familie 1, nachgezogen), REQ-0011/REQ-0012 (Familie 2, nachgezogen).
-> Weitere steigen bei REQ-0013.
+> REQ-0010 (Familie 1, nachgezogen), REQ-0011/REQ-0012 (Familie 2, nachgezogen),
+> REQ-0013…REQ-0015 (Familie 3), REQ-0016…REQ-0019 (Familie 4),
+> REQ-0020…REQ-0022 (Familie 5), REQ-0023…REQ-0025 (Familie 6, inkl. R-UI-3).
+> Weitere steigen bei REQ-0026.
 
 ## Familie 1 — Mesh-Betrieb (Grundfunktion)
 
@@ -46,33 +48,32 @@
 
 ## Familie 3 — Web-UI/Status (Gateway)
 
-- **R-UI-1** Anzeigeverzögerung < 5 s (Ziel §2, Messmethode zu schärfen)
-- **R-UI-2** UI statisch von SD, Core2-Display zeigt Status/Störung lokal
-- **R-UI-3** **Basic Auth auf der Gateway-Webseite** (2026-10-25); die
-  Telegrammebene hat **keinen Zugriffsschutz** — Node-RED-Anbindung gilt als
-  vertrauenswürdiger Teil des LAN-Betriebs
-- **R-UI-4** Offline-Knoten mit Zeitstempel, Browser und Node-RED gleiche Sicht
+- **REQ-0013 (R-UI-1)** Anzeigeverzögerung < 5 s (Ziel §2, Messmethode im FSPEC)
+- **REQ-0014 (R-UI-2)** UI statisch von SD, Core2-Display zeigt Status/Störung lokal
+- **REQ-0024 (R-UI-3 / R-SEC-2)** **Basic Auth nur Web-UI** (2026-10-25) — als
+  Schicht-REQ nach Familie 6 gelegt, UI verweist darauf
+- **REQ-0015 (R-UI-4)** Offline-Knoten mit Zeitstempel, Browser und Node-RED gleiche Sicht
 
 ## Familie 4 — Firmware-Update
 
-- **R-UPD-1** HTTP-Bereitstellung ab SD + Standard-OTA übers Mesh
-- **R-UPD-2** A/B + Bootloader-Verify: kein Brick, automatischer Rollback
-- **R-UPD-3** Einzel- und Gruppen-Update aus UI (mit Basic-Auth-Bestätigung) oder Node-RED
-- **R-UPD-4** Update-Erkennbarkeit: kein Update ohne Anstoß von außen (Non-Goal-Grenze)
+- **REQ-0016 (R-UPD-1)** HTTP-Bereitstellung ab SD + Standard-OTA übers Mesh
+- **REQ-0017 (R-UPD-2)** A/B + Bootloader-Verify: kein Brick, automatischer Rollback
+- **REQ-0018 (R-UPD-3)** Einzel- und Gruppen-Update aus UI (mit Basic-Auth-Bestätigung) oder Node-RED
+- **REQ-0019 (R-UPD-4)** Update-Erkennbarkeit: kein Update ohne Anstoß von außen (Non-Goal-Grenze)
 
 ## Familie 5 — Betrieb/Ausfall
 
-- **R-OPS-1** Node-RED-Ausfall: Gateway läuft weiter, puffert asynchron, liefert nach
-- **R-OPS-2** Knoten ausgefallen: Offline-Anzeige, Werte mit Zeitstempel, Störung auf Display
-- **R-OPS-3** Gateway-Ausfall: Mesh betriebsfähig für Knotentausch, Root-Heilung ohne Gateway (R-MESH-2 + User-Guide-Heilung)
+- **REQ-0020 (R-OPS-1)** Node-RED-Ausfall: Gateway läuft weiter, puffert asynchron, liefert nach
+- **REQ-0021 (R-OPS-2)** Knoten ausgefallen: Offline-Anzeige, Werte mit Zeitstempel, Störung auf Display
+- **REQ-0022 (R-OPS-3)** Gateway-Ausfall: Mesh betriebsfähig für Knotentausch, Root-Heilung ohne Gateway (R-MESH-2 + User-Guide-Heilung)
 
 ## Familie 6 — Sicherheitsrahmen
 
-- **R-SEC-1** LAN-Begrenzung: keine Cloud-/Internetanbindung (Non-Goal)
-- **R-SEC-2** Zugang: Basic Auth auf Web-UI, Telegrammebene ohne Zugriffsschutz
+- **REQ-0023 (R-SEC-1)** LAN-Begrenzung: keine Cloud-/Internetanbindung (Non-Goal)
+- **REQ-0024 (R-SEC-2)** Zugang: Basic Auth auf Web-UI, Telegrammebene ohne Zugriffsschutz
   (Node-RED vertrauenswürdig); Checksummen als Schutzebene, bewusster Verzicht auf
   Image-Signierung/Secure Boot/TLS
-- **R-SEC-3** Mesh-Sicherheit: WPA2-PSK Pflicht, **AES128 deaktiviert** (2026-10-25)
+- **REQ-0025 (R-SEC-3)** Mesh-Sicherheit: WPA2-PSK Pflicht, AES128-Option **nicht** eingesetzt (2026-10-25)
 
 ## Familie 7 — Redundanz (optional, M8)
 
