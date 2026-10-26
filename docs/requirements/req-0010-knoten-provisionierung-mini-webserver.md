@@ -1,7 +1,7 @@
 ---
 id: REQ-0010
-title: "Kundeneinrichtung über knoteneigenen Mini-Webserver im AP-Hilfsmodus"
-version: 0.1.0
+title: "Knoteneinrichtung über knoteneigenen Mini-Webserver im AP-Hilfsmodus"
+version: 0.2.0
 status: Draft
 created_at: 2026-10-26
 implemented_in:
@@ -27,13 +27,19 @@ Der Knoten arbeitet als **Access Point** und stellt die Konfigurationsseite
 bereit, wenn
 
 1. noch **keine Mesh-Konfiguration** erfolgt ist, oder
-2. sich der Knoten **länger als einen parametrisch geforderten Zeitraum**
-   (konkreter Wert im FSPEC, T-012) nicht mit dem eingetragenen Mesh-Netz
-   verbinden kann.
+2. der Knoten das eingetragene Mesh-Netz **länger als einen parametrisch
+   definierten Zeitraum** (konkreter Wert im FSPEC, T-012) nicht sieht —
+   unabhängig davon, ob er schon einmal verbunden war.
 
-Nach gelungener Konfiguration verbindet sich der Knoten mit dem Mesh und
-verlässt den AP-Hilfsmodus. Der Weg zurück in die Konfiguration (erneutes
-Setzen bei Netzwechsel/Ausfall) ist im FSPEC zu definieren.
+Im AP-Hilfsmodus gilt:
+
+- Der Knoten unternimmt **in definierten Intervallen** (FSPEC) weiterhin den
+  Versuch, sich mit dem konfigurierten Mesh-Netz zu verbinden; gelingen diese
+  Versuche, verlässt er den AP-Hilfsmodus.
+- Besteht eine **aktive Verbindung zum Webserver** (etwa laufende
+  Konfigurationsanpassungen), wechselt der Knoten **nicht** in den
+  Mesh-Betrieb, bis die Verbindung beendet ist.
+- Nach gelungener Ersteinrichtung verbindet sich der Knoten mit dem Mesh.
 
 # Rationale
 
@@ -55,6 +61,12 @@ Drei Tests:
    AP-Hilfsmodus und bietet die Seite an.
 3. **Erreichbarkeit im Betrieb:** Im Mesh-Betrieb ist die AP-Seite standardmäßig
    nicht offen.
+4. **Intervall-Neustart:** Ist das Mesh während des AP-Hilfsmodus wieder
+   sichtbar, verlässt der Knoten im nächsten Verbindungsintervall automatisch
+   den AP-Modus.
+5. **Webserver-Halt:** Ein Browser ist mit der Konfigurationsseite verbunden,
+   während das Mesh wieder sichtbar wird — der Knoten bleibt bis zum Ende der
+   Verbindung im AP-Hilfsmodus und joined erst danach.
 
 # Human approval
 Approver: pending  
