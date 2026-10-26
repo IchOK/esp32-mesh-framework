@@ -3,24 +3,28 @@
 > **Kein REQ-Objekt, kein Governance-Dokument** — nur Gerüst für die Detailierung.
 > Ziel: REQs sollen vollständig über die project.md-Ziele (§2/§3/§5) liegen und
 > später saubere FSPEC-Andockpunkte haben. Nummern (REQ-00xx) erst bei Draft-Anlage.
+>
+> **Nummerierung (2026-10-26):** global aufsteigend statt family-basiert.
+> Angelegte Drafts: REQ-0001…REQ-0003 (Familie 1), REQ-0004…REQ-0009 (Familie 2).
+> Weitere Familien steigen bei REQ-0010.
 
 ## Familie 1 — Mesh-Betrieb (Grundfunktion)
 
-- **R-MESH-1** Multi-Hop: Knoten außerhalb Gateway-Reichweite liefert über Nachbarn (Ziel §2)
-- **R-MESH-2** Gatewayloser Betrieb: Datenaustausch zwischen Knoten ohne Gateway (Ziel §2)
-- **R-MESH-3** Selbstorganisation/Heilung: Netzwerk baut sich ohne manuellen Eingriff (Referanz User_Guide: Provisioning/Repair)
+- **REQ-0001 (R-MESH-1)** Multi-Hop: Knoten außerhalb Gateway-Reichweite liefert über Nachbarn (Ziel §2)
+- **REQ-0002 (R-MESH-2)** Gatewayloser Betrieb: Datenaustausch zwischen Knoten ohne Gateway (Ziel §2)
+- **REQ-0003 (R-MESH-3)** Selbstorganisation/Heilung: Netzwerk baut sich ohne manuellen Eingriff (Referanz User_Guide: Provisioning/Repair)
 - Messgrößen: Repair < 50 s, Provisioning < 60 s (Toolchain-Check Befund 6)
 
 ## Familie 2 — Datentransport (Gateway ↔ Mesh ↔ Node-RED)
 
-- **R-DATA-1** Asynchron: Knotendaten→Node-RED, mit Ringpuffer bei Node-RED-Trennung + Reihenfolge beim Wiederaufbau
-- **R-DATA-2** Synchron: direktes Durchreichen + sofortige Rückmeldung, kein Puffer, kein Retry, Fehler bei nicht erreichbar
-- **R-DATA-3** Klassenzuordnung: **keine Grundregel** — jeder Telegrammtyp wird
+- **REQ-0004 (R-DATA-1)** Asynchron: Knotendaten→Node-RED, mit Ringpuffer bei Node-RED-Trennung + Reihenfolge beim Wiederaufbau
+- **REQ-0005 (R-DATA-2)** Synchron: direktes Durchreichen + sofortige Rückmeldung, kein Puffer, kein Retry, Fehler bei nicht erreichbar
+- **REQ-0006 (R-DATA-3)** Klassenzuordnung: **keine Grundregel** — jeder Telegrammtyp wird
   im Nachrichtenlexikon einzeln als synchron/asynchron klassifiziert (2026-10-25)
-- **R-DATA-4** Heartbeat-/Offline-Erkennung: Timeout als **parametrisch** formuliert
+- **REQ-0007 (R-DATA-4)** Heartbeat-/Offline-Erkennung: Timeout als **parametrisch** formuliert
   (Werte erst nach PoC-Messungen im FSPEC, 2026-10-25), letzte Werte bleiben sichtbar
-- **R-DATA-5** Timestamp: **jedes Telegramm enthält seinen Zeitstempel**
-- **R-DATA-6** Time-Sync: **Node-RED** sendet über das Gateway ein besonderes
+- **REQ-0008 (R-DATA-5)** Timestamp: **jedes Telegramm enthält seinen Zeitstempel**
+- **REQ-0009 (R-DATA-6)** Time-Sync: **Node-RED** sendet über das Gateway ein besonderes
   Time-Sync-Telegramm an alle Knoten; die Knoten führen die Zeit danach selbst
   weiter (Uhrstetigkeit/RTC-Frage als FSPEC-Punkt, T-025). Ohne Node-RED-Bezug:
   zuletzt bekannte Zeit mit Flag „nicht referenziert“ (2026-10-25)
