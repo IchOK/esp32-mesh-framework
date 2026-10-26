@@ -32,9 +32,9 @@
   (Werte erst nach PoC-Messungen im FSPEC, 2026-10-25), letzte Werte bleiben sichtbar
 - **REQ-0008 (R-DATA-5)** Timestamp: **jedes Telegramm enthält seinen Zeitstempel**
 - **REQ-0009 (R-DATA-6)** Time-Sync: **Node-RED** sendet über das Gateway ein besonderes
-  Time-Sync-Telegramm an alle Knoten; die Knoten führen die Zeit danach selbst
-  weiter (Uhrstetigkeit/RTC-Frage als FSPEC-Punkt, T-025). Ohne Node-RED-Bezug:
-  zuletzt bekannte Zeit mit Flag „nicht referenziert“ (2026-10-25)
+  Time-Sync-Telegramm **per Broadcast** an alle Knoten; die Knoten führen die Zeit danach selbst
+  weiter (Uhrstetigkeit/RTC-Frage als FSPEC-Punkt, T-025). Flag „nicht referenziert“
+  erst nach längerem parametrischem Ausbleiben eines Syncs (2026-10-26)
 - **REQ-0011 (R-DATA-7)** Zielgerichteter Knotenpuffer abwärts: asynchrone
   Node-RED-Telegramme an nicht erreichbare Knoten werden **pro Zielknoten**
   gepuffert, zeitliche Reihenfolge je Ziel, Wiederaufnahme nur der

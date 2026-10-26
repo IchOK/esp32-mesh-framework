@@ -1,7 +1,7 @@
 ---
 id: PROJECT-0001
 title: "ESP32 Mesh Framework"
-version: 0.30.0
+version: 0.31.0
 template_version: 0.1.0
 created_at: 2026-10-25
 modified_at: 2026-10-25
@@ -135,9 +135,11 @@ Functional Specifications festgelegt.
   Bestätigung offen.
 - Gateway ↔ Mesh-Knoten: IP über ESP-Mesh-Lite (Multi-Hop).
 - **Zeitbasis:** Time-Sync innerhalb des Netzwerkes, getrieben von **Node-RED**:
-  Node-RED sendet über das Gateway ein besonderes Time-Sync-Telegramm an alle
-  Knoten; die Knoten führen die Zeit danach selbst weiter. Telegramme führen
-  ihren Zeitstempel mit (RTC-/Stetigkeitsfrage → T-025).
+  Node-RED sendet über das Gateway ein besonderes Time-Sync-Telegramm **per
+  Broadcast** an alle Knoten; die Knoten führen die Zeit danach selbst weiter.
+  Das Flag „nicht referenziert“ greift erst, wenn über einen längeren
+  parametrischen Zeitraum kein Sync mehr ankam. Telegramme führen ihren
+  Zeitstempel mit (RTC-/Stetigkeitsfrage → T-025).
 - Telegramme im Gesamtsystem (Knoten↔Knoten, Knoten↔Gateway, Gateway↔Node-RED):
   zwei Klassen – **asynchron** (einfaches Senden, keine Rückmeldung erwartet;
   z. B. zyklische Meldungen, Parameteranpassungen) und **synchron** (senden und
@@ -302,6 +304,7 @@ Die Abfolge wird durch freigegebene Spezifikationen konkretisiert, diese Tabelle
 
 | Version | Date | Change |
 |---|---|---|
+| 0.31.0 | 2026-10-26 | Kommentare aus Review REQ-0005/-0009: asynchrone Definition nach REQ-0004 verlagert, Time-Sync als Broadcast, Flag „nicht referenziert“ erst nach längerem parametrischem Ausbleiben. |
 | 0.30.0 | 2026-10-26 | Empfangsquittung für asynchrone Telegramme ergänzt (REQ-0012): nur Zugang bestätigt, Ausbleiben = nicht zugestellt ohne Offline-Vorabinformation, koppelt an REQ-0011. |
 | 0.29.0 | 2026-10-26 | Sync/Async als allgemeine Telegrammeigenschaft festgeschrieben (nicht Node-RED-spezifisch): async ohne Rückmeldungserwartung, sync mit Rückmeldung, bei Ausbleiben entscheidet der Absender. REQ-0005 v0.2.0. |
 | 0.28.0 | 2026-10-25 | REQ-Kanons entschieden: sync/asyn als Telegrammtyp-Kategorien, Parameter parametrisch, Basic Auth nur Web (Telegramme ungesichert), WPA2-PSK ohne AES128, Time-Sync Node-RED-geführt, Toolchain ESP-IDF pur (ADR-0004), REQ-RED-1 als Draft. |

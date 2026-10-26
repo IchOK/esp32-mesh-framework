@@ -1,7 +1,7 @@
 ---
 id: REQ-0004
 title: "Asynchroner Datenpfad Knoten → Node-RED mit Pufferung"
-version: 0.2.0
+version: 0.2.1
 status: Draft
 created_at: 2026-10-26
 implemented_in:
@@ -16,8 +16,11 @@ Knotendaten sollen nicht verloren gehen.
 
 # Requirement
 
-Node-seitig aufgebaute Datenmeldungen werden als **asynchron** zugestellt:
-erreicht die WebSocket-Verbindung zu Node-RED nicht, puffert das Gateway die
+Node-seitig aufgebaute Datenmeldungen werden als **asynchron** zugestellt.
+Asynchron heißt dabei: es wird ohne Rückmeldungserwartung gesendet; als
+solche Telegramme gelten z. B. zyklische Meldungen und
+Parameteranpassungen (in beide Richtungen). Erreicht die
+WebSocket-Verbindung zu Node-RED nicht, puffert das Gateway die
 Telegramme in einem **Ringpuffer** dessen Größe und Haltezeit
 **parametrisch** gefordert werden (konkrete Werte nach PoC-Messung, T-012).
 Nach Verbindungswiederherstellung liefert das Gateway die gepufferten

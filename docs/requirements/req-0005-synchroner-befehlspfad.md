@@ -1,7 +1,7 @@
 ---
 id: REQ-0005
 title: "Synchroner Telegrammpfad mit Rückmeldung des Empfängers"
-version: 0.2.0
+version: 0.2.1
 status: Draft
 created_at: 2026-10-26
 implemented_in:
@@ -31,9 +31,8 @@ sich (Beispiel Schaltbefehl) und erwarten eine **Rückmeldung des Empfängers**:
    Synchron-Telegramme nicht — nur asynchrone Telegramme fallen unter
    REQ-0004 und REQ-0011.
 
-Asynchrone Telegramme (Beispiel zyklische Meldungen, Parameteranpassungen)
-werden ohne Rückmergewartung gesendet. Die Klassifikation gilt für jede
-Beziehung: Knoten↔Knoten, Knoten↔Gateway und Gateway↔Node-RED.
+Die Klassifikation gilt für jede Beziehung: Knoten↔Knoten, Knoten↔Gateway
+und Gateway↔Node-RED.
 
 # Rationale
 
